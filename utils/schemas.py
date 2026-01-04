@@ -7,3 +7,7 @@ class FeedbackRecord:
     source_type: str   # app_store | support_email
     raw_text: str
     metadata: Dict[str, Any]
+@dataclass
+class ClassificationResult:
+    category: str        # Bug | Feature Request | Praise | Complaint | Spam
+    confidence: float    # 0.0 - 1.0
