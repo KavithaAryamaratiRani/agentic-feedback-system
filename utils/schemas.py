@@ -17,3 +17,24 @@ class FeatureAnalysisResult:
     user_intent: str
     demand_level: str   # Low | Medium | High
     suggested_priority: str  # Low | Medium | High
+@dataclass
+class Ticket:
+    ticket_id: str
+    title: str
+    category: str
+    priority: str
+    description: str
+    technical_details: str
+    source_id: str
+    source_type: str
+    confidence: float
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass
+class BugAnalysisResult:
+    steps_to_reproduce: Optional[str]
+    platform: Optional[str]
+    device: Optional[str]
+    app_version: Optional[str]
+    severity: str  # Critical | High | Medium | Low
