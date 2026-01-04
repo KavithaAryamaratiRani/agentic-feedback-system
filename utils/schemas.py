@@ -11,3 +11,9 @@ class FeedbackRecord:
 class ClassificationResult:
     category: str        # Bug | Feature Request | Praise | Complaint | Spam
     confidence: float    # 0.0 - 1.0
+@dataclass
+class FeatureAnalysisResult:
+    feature_summary: str
+    user_intent: str
+    demand_level: str   # Low | Medium | High
+    suggested_priority: str  # Low | Medium | High
