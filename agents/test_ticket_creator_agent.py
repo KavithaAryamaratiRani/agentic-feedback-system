@@ -3,13 +3,9 @@ from agents.classifier_agent import classify_feedback
 from agents.bug_analysis_agent import analyze_bug
 from agents.feature_extraction_agent import analyze_feature
 from agents.ticket_creator_agent import create_ticket
-from agents.quality_critic_agent import review_ticket
-from utils.csv_writer import write_generated_tickets, write_processing_log
 
-
-def run_pipeline():
+if __name__ == "__main__":
     records = load_all_feedback()
-    results = []
 
     for r in records:
         classification = classify_feedback(r.raw_text)
@@ -25,16 +21,5 @@ def run_pipeline():
         else:
             ticket = create_ticket(r, classification)
 
-        review = review_ticket(ticket)
-
-        results.append({
-            "ticket": ticket,
-            "review": review
-        })
-
-    # ✅ WRITE CSV OUTPUTS FIRST
-    write_generated_tickets(results)
-    write_processing_log(results)
-
-    # ✅ THEN RETURN RESULTS
-    return results
+        print(ticket)
+        print("-" * 80)

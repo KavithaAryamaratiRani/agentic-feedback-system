@@ -4,7 +4,7 @@ import json
 from groq import Groq
 from utils.schemas import ClassificationResult
 
-# Load environment variables
+# Load environment variables from .env
 load_dotenv()
 
 # Initialize Groq client
@@ -27,7 +27,7 @@ Return STRICT JSON ONLY in the following format:
 
 def classify_feedback(text: str) -> ClassificationResult:
     response = client.chat.completions.create(
-        model="llama-3.1-8b-instant",  # ✅ UPDATED MODEL
+        model="llama-3.1-8b-instant",
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": text}
@@ -35,6 +35,7 @@ def classify_feedback(text: str) -> ClassificationResult:
         temperature=0
     )
 
+    # Parse strict JSON response
     parsed = json.loads(response.choices[0].message.content)
 
     return ClassificationResult(

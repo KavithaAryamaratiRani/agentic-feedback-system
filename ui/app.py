@@ -56,3 +56,16 @@ if st.button("▶ Run Feedback Processing"):
     col1, col2 = st.columns(2)
     col1.metric("Approved Tickets", len(approved))
     col2.metric("Rejected Tickets", len(rejected))
+from utils.metrics import compute_metrics
+
+st.subheader("📈 Accuracy Metrics")
+
+if st.button("🔄 Recalculate Metrics"):
+    metrics = compute_metrics()
+
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Classification Accuracy", f"{metrics['classification_accuracy']}%")
+    col2.metric("Priority Accuracy", f"{metrics['priority_accuracy']}%")
+    col3.metric("Records Compared", metrics["total_compared"])
+else:
+    st.info("Run feedback processing first to generate metrics.")
